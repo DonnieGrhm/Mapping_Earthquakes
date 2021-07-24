@@ -5,7 +5,7 @@
 console.log("working");
 
 // Create the map object with a center and zoom level.
-let map = L.map('mapid').setView([26, -80], 7);
+let map = L.map('mapid').setView([40.7, -94.5], 4);
 // The setView() method sets the view of the map with a geographical center, where the first coordinate is latitude (40.7) and the second is longitude (-94.5).
 // We set the zoom level of "4" on a scale 0–18.
 
@@ -24,12 +24,22 @@ This method is useful when we need to add multiple tile layers, or a background 
 */
 // -------------------------------------------
 
-//  Add a marker to the map for your hometown, Opa-Locka, Florida.
-L.circleMarker([25.9206, -80.2370], {
-  color: 'black',
-  fillColor: '#ffffa1',
-  radius:300
-}).addTo(map);
+// Get data from cities.js
+let cityData = cities;
+
+// Loop through the cities array and create one marker for each city.
+//Inside the parentheses of the bindPopup() method, we'll retrieve the name of the city, state, and population.
+cityData.forEach(function(city) {
+  console.log(city)
+  L.circleMarker(city.location, {
+    radius: city.population/200000,
+    lineWeight: 4,
+    color: 'orange'
+  })
+  .bindPopup("<h2>" + city.city + ", " + city.state + "</h2> <hr> <h3>Population " + city.population.toLocaleString() + "</h3>")
+.addTo(map);
+});
+
 
 // We create the tile layer that will be the background of our map.
 let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
