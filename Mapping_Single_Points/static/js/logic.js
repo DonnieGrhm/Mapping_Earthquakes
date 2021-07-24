@@ -5,7 +5,7 @@
 console.log("working");
 
 // Create the map object with a center and zoom level.
-let map = L.map('mapid').setView([40.7, -94.5], 4);
+let map = L.map('mapid').setView([26, -80], 7);
 // The setView() method sets the view of the map with a geographical center, where the first coordinate is latitude (40.7) and the second is longitude (-94.5).
 // We set the zoom level of "4" on a scale 0–18.
 
@@ -23,8 +23,16 @@ let map = L.map("mapid", {
 This method is useful when we need to add multiple tile layers, or a background image of our maps, which we will do later in this module.
 */
 // -------------------------------------------
+
+//  Add a marker to the map for your hometown, Opa-Locka, Florida.
+L.circleMarker([25.9206, -80.2370], {
+  color: 'black',
+  fillColor: '#ffffa1',
+  radius:300
+}).addTo(map);
+
 // We create the tile layer that will be the background of our map.
-let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     accessToken: API_KEY
