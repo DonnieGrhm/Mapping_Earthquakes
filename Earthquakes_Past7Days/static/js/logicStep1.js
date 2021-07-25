@@ -55,6 +55,9 @@ let map = L.map('mapid', {
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
+// Accessing the Toronto neighborhoods GeoJSON URL.
+let eq7Days = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
 // Create a style for the lines.
 let myStyle = {
   color: "#0000ff",
@@ -63,7 +66,7 @@ let myStyle = {
 }
 
 // Retrieve the earthquake GeoJSON data.
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data) {
+d3.json(eq7Days).then(function(data) {
 // Creating a GeoJSON layer with the retrieved data.
 L.geoJson(data).addTo(map);
 });
